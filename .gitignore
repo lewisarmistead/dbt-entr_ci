@@ -1,0 +1,7 @@
+.venv
+requirements.txt
+
+target/
+dbt_modules/
+logs/
+dbt_packages/
