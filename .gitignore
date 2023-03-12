@@ -1,5 +1,6 @@
 .venv
 requirements.txt
+.vscode
 
 target/
 dbt_modules/
