@@ -4,4 +4,4 @@ models:
   - name: int_fct_entr_plant_data__structured
     description: 0-row table schema for the standard ENTR plant data fact table
     meta:
-      entr_fact_table: fct_entr_plant_data
+      entr_table: fct_entr_plant_data
