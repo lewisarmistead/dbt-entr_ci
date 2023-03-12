@@ -6,7 +6,7 @@
     {% set identified_relations = [] %}
     {% for node in graph.nodes.values() | selectattr("resource_type", "in", ["model", "seed"]) %}
         {%- if node.config.meta.get('entr_table') == entr_table %}
-            {% do identified_relations.append(node.name) %}
+            {% do identified_relations.append( ref(node.name) ) %}
         {% endif -%}
     {% endfor%}
     {{ return(identified_relations) }}
