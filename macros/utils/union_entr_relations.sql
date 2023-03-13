@@ -12,7 +12,7 @@
 
     {{dbt_utils.union_relations(
         relations=entr.get_entr_relations(entr_table=entr_table),
-        include=dbt_utils.get_filtered_columns_in_relation(ref('int_' ~ entr_table ~ '__structured'),
+        include=dbt_utils.get_filtered_columns_in_relation(ref('int_' ~ entr_table ~ '__structured')),
         column_override={
             "PLANT_ID": dbt_utils.type_int(),
             "WIND_TURBINE_ID": dbt_utils.type_int(),
