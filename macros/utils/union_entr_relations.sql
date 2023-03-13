@@ -1,5 +1,5 @@
-{% macro union_entr_relations(entr_table) -%}
-    {{ return(adapter.dispatch('union_entr_relations', 'entr')(entr_table)) }}
+{% macro union_entr_relations(entr_table, column_list) -%}
+    {{ return(adapter.dispatch('union_entr_relations', 'entr')(entr_table, column_list)) }}
 {% endmacro %}
 
 {# dbt_utils.get_filtered_columns_in_relation(ref('int_' ~ entr_table ~ '__structured') #}
