@@ -1,5 +1,5 @@
 {% set relation_names = var('fct_entr_plant_models') %}
-{% relations = [] %}
+{% set relations = [] %}
 {%- for rel in relation_names %}
 -- depends_on: {{ref(rel)}}
     {% do relations.append( ref("'" ~ rel ~ "'") ) %}
