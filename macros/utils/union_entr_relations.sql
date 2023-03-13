@@ -4,15 +4,15 @@
 
 {#  #}
 {% macro default__union_entr_relations(entr_table) %}
-    {%- set _relation_names=entr.get_entr_relations(entr_table=entr_table) %}
-    {%- for rel in _relation_names %}
--- depends_on: {{ref(rel)}}
-    {% endfor %}
-
     {#-- Prevent querying of db in parsing mode. This works because this macro does not create any new refs. -#}
     {%- if not execute %}
         {{ return('') }}
     {% endif -%}
+    {%- set _relation_names=entr.get_entr_relations(entr_table=entr_table) %}
+
+    {%- for rel in _relation_names %}
+-- depends_on: {{ref(rel)}}
+    {% endfor %}
 
     {% set _relations = [] %}
     {% for rel in _relation_names %}
