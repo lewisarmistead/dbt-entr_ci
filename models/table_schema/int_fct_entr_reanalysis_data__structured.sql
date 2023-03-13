@@ -9,6 +9,7 @@ with
             cast(0 as {{dbt_utils.type_numeric()}}) as interval_s,
             cast('str' as {{dbt_utils.type_string()}}) as value_type,
             cast('str' as {{dbt_utils.type_string()}}) as value_units
+        limit 0
     )
 
-select top 0 * from structure
+select * from structure

@@ -2,6 +2,14 @@ version: 2
 
 models:
   - name: int_fct_entr_plant_data__structured
-    description: 0-row table schema for the standard ENTR plant data fact table
+    description: 0-row table containing structure for the standard ENTR plant data fact table
     meta:
       entr_table: fct_entr_plant_data
+  - name: int_fct_entr_reanalysis_data__structured
+    description: 0-row table containing structure for the standard ENTR reanalysis data fact table
+    meta:
+      entr_table: fct_entr_reanalysis_data
+  - name: int_fct_entr_wtg_scada__structured
+    description: 0-row table containing structure for the standard ENTR wind turbine SCADA data fact table
+    meta:
+      entr_table: fct_entr_wtg_scada
