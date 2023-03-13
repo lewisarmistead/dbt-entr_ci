@@ -8,7 +8,7 @@
 select * from
 {{dbt_utils.union_relations(
     relations=relations,
-    include=dbt_utils.get_filtered_columns_in_relation(ref('int_fct_entr_plant_data__structured')),
+    include=adapter.get_columns_in_relation(ref('int_fct_entr_plant_data__structured')),
     column_override={
         "PLANT_ID": dbt_utils.type_int(),
         "WIND_TURBINE_ID": dbt_utils.type_int(),
