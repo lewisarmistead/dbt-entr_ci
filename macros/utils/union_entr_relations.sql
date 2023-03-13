@@ -1,12 +1,18 @@
-{% macro union_entr_relations(entr_table, column_list) -%}
-    {{ return(adapter.dispatch('union_entr_relations', 'entr')(entr_table, column_list)) }}
+{% macro union_entr_relations(entr_table) -%}
+    {{ return(adapter.dispatch('union_entr_relations', 'entr')(entr_table)) }}
 {% endmacro %}
 
-{# dbt_utils.get_filtered_columns_in_relation(ref('int_' ~ entr_table ~ '__structured') #}
-{% macro default__union_entr_relations(entr_table, column_list) %}
+{#  #}
+{% macro default__union_entr_relations(entr_table) %}
+    
+    {#-- Prevent querying of db in parsing mode. This works because this macro does not create any new refs. -#}
+    {%- if not execute %}
+        {{ return('') }}
+    {% endif -%}
+
     {{dbt_utils.union_relations(
         relations=entr.get_entr_relations(entr_table=entr_table),
-        include=column_list,
+        include=dbt_utils.get_filtered_columns_in_relation(ref('int_' ~ entr_table ~ '__structured'),
         column_override={
             "PLANT_ID": dbt_utils.type_int(),
             "WIND_TURBINE_ID": dbt_utils.type_int(),
