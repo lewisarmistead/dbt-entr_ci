@@ -25,6 +25,13 @@
         "INTERVAL_S": dbt_utils.type_numeric(),
         "VALUE_TYPE": dbt_utils.type_string(),
         "VALUE_UNITS": dbt_utils.type_string(),
+        "ENTR_TAG_NAME": dbt_utils.type_string(),
+        "LOGICAL_NODE": dbt_utils.type_string(),
+        "SENSOR_NAME": dbt_utils.type_string(),
+        "PRESENTATION_NAME": dbt_utils.type_string(),
+        "STANDARD_UNITS": dbt_utils.type_string(),
+        "DATA_TYPE": dbt_utils.type_string(),
+        "COLLECTOR_TYPE": dbt_utils.type_string(),
     } %}
     {% for k,v in overrides.items() %}
         {% do coltypes.update({k:v}) %}
