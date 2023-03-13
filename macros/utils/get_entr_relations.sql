@@ -4,9 +4,6 @@
 
 {% macro default__get_entr_relations(entr_table) %}
     {% set identified_relations = [] %}
-    {%- if graph.get(nodes) is None -%}
-        {%- do exceptions.warn("blar") -%}
-    {%- endif -%}
     {% for node in graph.nodes.values() | selectattr("resource_type", "in", ["model", "seed"]) %}
         {%- if node.config.meta.get('entr_table') == entr_table %}
             {% do identified_relations.append( ref(node.name) ) %}
