@@ -36,7 +36,7 @@ models:
     +materialized: view
 
 vars:
-  dim_asset_reanalysis_models: ['int_dim_asset_reanalysis__structured']
+  dim_asset_reanalysis_dataset_models: ['int_dim_asset_reanalysis_dataset__structured']
   dim_asset_wind_plant_models: ['int_dim_asset_wind_plant__structured']
   dim_asset_wind_turbine_models: ['int_dim_asset_wind_turbine__structured']
   fct_entr_plant_models: ['int_fct_entr_plant_data__structured']
