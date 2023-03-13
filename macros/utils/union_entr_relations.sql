@@ -6,7 +6,7 @@
 {% macro default__union_entr_relations(entr_table, column_list) %}
     {{dbt_utils.union_relations(
         relations=entr.get_entr_relations(entr_table=entr_table),
-        include=column_list),
+        include=column_list,
         column_override={
             "PLANT_ID": dbt_utils.type_int(),
             "WIND_TURBINE_ID": dbt_utils.type_int(),
