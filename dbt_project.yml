@@ -1,17 +1,9 @@
-
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
 name: 'entr'
 version: '0.1.0'
 config-version: 2
 
-# This setting configures which "profile" dbt uses for this project.
 profile: 'entr'
 
-# These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
@@ -19,20 +11,25 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
+target-path: "target"
+clean-targets:
   - "target"
   - "dbt_packages"
 
-
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In this example config, we tell dbt to build all models in the example/ directory
-# as tables. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
 models:
   entr:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    +materialized: view
+
+seeds:
+  entr:
+    examples:
+      +enabled: false
+
+vars:
+  dim_asset_reanalysis_dataset_models: ['int_dim_asset_reanalysis_dataset__structured']
+  dim_asset_wind_plant_models: ['int_dim_asset_wind_plant__structured']
+  dim_asset_wind_turbine_models: ['int_dim_asset_wind_turbine__structured']
+  dim_entr_tag_list_models: ['int_dim_entr_tag_list__structured', 'seed_entr_tag_list']
+  fct_entr_plant_models: ['int_fct_entr_plant_data__structured']
+  fct_entr_wtg_scada_models: ['int_fct_entr_wtg_scada__structured']
+  fct_entr_reanalysis_models: ['int_fct_entr_reanalysis_data__structured']

@@ -1,5 +1,6 @@
 {#
     TODO:
+        - REMOVE MACRO -> should just be able to replace this with dbt_utils.get_filtered_columns_in_relation
         - rename macro
         - rename quote to quote_identifiers (consistent with dbt_utils.star)
         - audit case sensitivity to make sure it won't be a problem
