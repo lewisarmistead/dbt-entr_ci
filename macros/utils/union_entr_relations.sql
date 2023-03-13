@@ -1,3 +1,4 @@
+{#
 {% macro union_entr_relations(entr_table) -%}
     {{ return(adapter.dispatch('union_entr_relations', 'entr')(entr_table)) }}
 {% endmacro %}
@@ -9,7 +10,6 @@
         {{ return('') }}
     {% endif -%}
     {%- set _relation_names=entr.get_entr_relations(entr_table=entr_table) %}
-
     {%- for rel in _relation_names %}
 -- depends_on: {{ref(rel)}}
     {% endfor %}
@@ -36,3 +36,4 @@
         }
     )}}
 {% endmacro %}
+#}

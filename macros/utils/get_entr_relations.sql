@@ -1,3 +1,5 @@
+{#
+
 {% macro get_entr_relations(entr_table) -%}
     {{ return(adapter.dispatch('get_entr_relations', 'entr')(entr_table)) }}
 {% endmacro %}
@@ -15,3 +17,4 @@
     {% endif %}
     {{ return(identified_relations) }}
 {% endmacro %}
+#}

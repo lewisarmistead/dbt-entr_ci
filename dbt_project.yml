@@ -34,3 +34,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   entr:
     +materialized: view
+
+vars:
+  fct_entr_plant_models: ['int_fct_entr_plant_data__structured']
