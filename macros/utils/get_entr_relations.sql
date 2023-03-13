@@ -7,11 +7,11 @@
     {% if execute %}
         {% for node in graph.nodes.values() | selectattr("resource_type", "in", ["model", "seed"]) %}
             {%- if node.config.meta.get('entr_table') == entr_table %}
-                {% do identified_relations.append( ref(node.name) ) %}
+                {% do identified_relations.append( node.name ) %}
             {% endif -%}
         {% endfor%}
     {% else %}
-        {% do identified_relations.append( api.Relation.create() ) %}
+        {% do identified_relations.append( '' ) %}
     {% endif %}
     {{ return(identified_relations) }}
 {% endmacro %}
