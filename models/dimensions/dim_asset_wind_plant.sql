@@ -8,6 +8,6 @@
 select * from
 {{dbt_utils.union_relations(
     relations=relations,
-    include=dbt_utils.get_filtered_columns_in_relation(ref('int_dim_asset_wind_plant_models__structured')),
+    include=dbt_utils.get_filtered_columns_in_relation(ref('int_dim_asset_wind_plant__structured')),
     column_override=get_entr_column_types()
 )}}
