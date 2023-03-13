@@ -37,4 +37,4 @@ models:
 
 vars:
   fct_entr_plant_models: ['int_fct_entr_plant_data__structured']
-  entr_column_types: {}
+  entr_column_type_overrides: {"PLANT_ID": "NUMBER(10,4)"}
