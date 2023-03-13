@@ -1,7 +1,3 @@
-{{
-    config(materialized='table')
-}}
-
 select
     cast(entr_tag_id as {{dbt_utils.type_int()}}) as entr_tag_id,
     cast(entr_tag_name as {{dbt_utils.type_string()}}) as entr_tag_name,
