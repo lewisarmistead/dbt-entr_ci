@@ -1,8 +1,13 @@
-{{
-    config(materialized='table')
-}}
+{% set relation_names = var('dim_asset_reanalysis_dataset_models') %}
+{% set relations = [] %}
+{%- for rel in relation_names %}
+    {% do relations.append( ref(rel) ) %}
+{% endfor -%}
 
-select
-    cast(reanalysis_dataset_id as {{dbt_utils.type_int()}}) as reanalysis_dataset_id,
-    cast(reanalysis_dataset_name as {{dbt_utils.type_string()}}) as reanalysis_dataset_name
-from {{ref('seed_asset_reanalysis_dataset')}}
+
+select * from
+{{dbt_utils.union_relations(
+    relations=relations,
+    include=dbt_utils.get_filtered_columns_in_relation(ref('int_dim_asset_reanalysis_dataset__structured')),
+    column_override=get_entr_column_types()
+)}}
