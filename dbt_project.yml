@@ -37,3 +37,5 @@ models:
 
 vars:
   fct_entr_plant_models: ['int_fct_entr_plant_data__structured']
+  fct_entr_wtg_scada_models: ['int_fct_entr_wtg_scada__structured']
+  fct_entr_reanalysis_models: ['int_fct_entr_reanalysis_data__structured']
