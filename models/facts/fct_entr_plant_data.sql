@@ -9,5 +9,5 @@ select * from
 {{dbt_utils.union_relations(
     relations=relations,
     include=dbt_utils.get_filtered_columns_in_relation(ref('int_fct_entr_plant_data__structured')),
-    column_override=var('entr_column_types')
+    column_override=get_entr_column_types()
 )}}
