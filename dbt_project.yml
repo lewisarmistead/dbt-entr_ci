@@ -19,6 +19,8 @@ clean-targets:
 models:
   entr:
     +materialized: view
+    examples:
+      +enabled: false
 
 seeds:
   entr:
