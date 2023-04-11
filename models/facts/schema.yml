@@ -1,5 +1,0 @@
-version: 2
-
-models:
-  - name: fct_entr_plant_data
-    description: generic ENTR fact table containing plant-level information
