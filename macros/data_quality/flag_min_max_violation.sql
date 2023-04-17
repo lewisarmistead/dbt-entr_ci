@@ -1,5 +1,5 @@
 {% macro flag_min_max_violation(target_col, min, max, where, inclusive=false, quote=false) %}
-    {{ return(adapter.dispatch('flag_min_max_violation', 'openoa')(target_col, min, max, where, inclusive, quote)) }}
+    {{ return(adapter.dispatch('flag_min_max_violation', 'entr')(target_col, min, max, where, inclusive, quote)) }}
 {% endmacro %}
 
 {% macro default__flag_min_max_violation(target_col, min, max, where, inclusive=false, quote=false) %}
