@@ -4,11 +4,11 @@
         - add support for time-based (instead of record count-based) staleness
 #}
 
-{% macro flag_stale(target_col, datetime_col, partition_by_cols, exclude_values=[], lag_length=1, quote=false) %}
-    {{ return(adapter.dispatch('flag_stale', 'entr')(target_col, datetime_col, partition_by_cols, exclude_values, lag_length, quote)) }}
+{% macro flag_stale_violation(target_col, datetime_col, partition_by_cols, exclude_values=[], lag_length=1, quote=false) %}
+    {{ return(adapter.dispatch('flag_stale_violation', 'entr')(target_col, datetime_col, partition_by_cols, exclude_values, lag_length, quote)) }}
 {% endmacro %}
 
-{% macro default__flag_stale(target_col, datetime_col, partition_by_cols, exclude_values=[], lag_length=1, quote=false) %}
+{% macro default__flag_stale_violation(target_col, datetime_col, partition_by_cols, exclude_values=[], lag_length=1, quote=false) %}
 
     {% if quote==true %}
         {% set _target_col = adapter.quote(target_col) %}

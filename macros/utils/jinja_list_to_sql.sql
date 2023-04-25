@@ -2,6 +2,7 @@
 {#
     TODO:
         - add suffix param
+        - type control?
 #}
 {% macro jinja_list_to_sql(jinja_list, exclude = [], relation_alias=False, field_separator=',\n', quote_identifiers=false) %}
     {%- for col in jinja_list %}
