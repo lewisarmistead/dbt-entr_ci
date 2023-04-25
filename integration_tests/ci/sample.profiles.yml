@@ -45,5 +45,5 @@ integration_tests:
       role: "{{ env_var('SNOWFLAKE_TEST_ROLE') }}"
       database: "{{ env_var('SNOWFLAKE_TEST_DATABASE') }}"
       warehouse: "{{ env_var('SNOWFLAKE_TEST_WAREHOUSE') }}"
-      schema: entr_integration_tests_snowflake
+      schema: "{{ env_var('SNOWFLAKE_TEST_SCHEMA') }}"
       threads: 1
