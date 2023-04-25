@@ -19,7 +19,7 @@ jobs:
       #     key: deps1-{{ .Branch }}
 
       - run:
-          name: "Setup dbt"
+          name: "Set Up dbt"
           # dbt-redshift dbt-snowflake dbt-bigquery
           command: |
             python3 -m venv dbt_venv
@@ -46,7 +46,7 @@ jobs:
             dbt --warn-error test --target postgres
 
       - store_artifacts:
-          path: /artifacts
+          path: ./logs
       # - run:
       #     name: "Run Tests - Redshift"
       #     command: |
