@@ -45,6 +45,8 @@ jobs:
             dbt --warn-error run --target postgres --full-refresh
             dbt --warn-error test --target postgres
 
+      - store_artifacts:
+        path: /artifacts
       # - run:
       #     name: "Run Tests - Redshift"
       #     command: |
