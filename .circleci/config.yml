@@ -46,7 +46,7 @@ jobs:
             dbt --warn-error test --target postgres
 
       - store_artifacts:
-        path: /artifacts
+          path: /artifacts
       # - run:
       #     name: "Run Tests - Redshift"
       #     command: |
