@@ -10,4 +10,4 @@ select * from
     relations=relations,
     include=dbt_utils.get_filtered_columns_in_relation(ref('int_fct_entr_time_series__structured')),
     column_override=get_entr_column_types()
-)}}
+)}} union_subquery

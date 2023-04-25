@@ -15,4 +15,4 @@ select * from
 {{dbt_utils.union_relations(
     relations=relations,
     column_override=get_entr_column_types()
-)}}
+)}} union_subquery
