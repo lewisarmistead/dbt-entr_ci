@@ -10,22 +10,22 @@ jobs:
     steps:
       - checkout
 
-      # - run:
-      #     run: setup_creds
-      #     command: |
-      #       echo $BIGQUERY_SERVICE_ACCOUNT_JSON > ${HOME}/bigquery-service-key.json
+      - run:
+          run: setup_creds
+          command: |
+            echo $BIGQUERY_SERVICE_ACCOUNT_JSON > ${HOME}/bigquery-service-key.json
 
       - restore_cache:
           key: deps1-{{ .Branch }}
 
       - run:
           name: "Set Up dbt"
-          # dbt-redshift dbt-bigquery
+          # dbt-redshift 
           command: |
             python3 -m venv dbt_venv
             . dbt_venv/bin/activate
             pip install --upgrade pip setuptools
-            pip install --pre dbt-core dbt-postgres dbt-snowflake
+            pip install --pre dbt-core dbt-postgres dbt-snowflake dbt-bigquery
             mkdir -p ~/.dbt
             cp integration_tests/ci/sample.profiles.yml ~/.dbt/profiles.yml
 
@@ -65,23 +65,21 @@ jobs:
             cd integration_tests
             dbt --warn-error deps --target snowflake
             dbt --warn-error seed --target snowflake --full-refresh
-            dbt --warn-error run --target snowflake
+            dbt --warn-error run --target snowflake --full-refresh
             dbt --warn-error test --target snowflake
 
-      # - run:
-      #     name: "Run Tests - BigQuery"
-      #     environment:
-      #         BIGQUERY_SERVICE_KEY_PATH: "/home/circleci/bigquery-service-key.json"
-
-      #     command: |
-      #       . dbt_venv/bin/activate
-      #       echo `pwd`
-      #       cd integration_tests
-      #       dbt --warn-error deps --target bigquery
-      #       dbt --warn-error seed --target bigquery --full-refresh
-      #       dbt --warn-error run --target bigquery --full-refresh --vars 'update: false'
-      #       dbt --warn-error run --target bigquery --vars 'update: true'
-      #       dbt --warn-error test --target bigquery
+      - run:
+          name: "Run Tests - BigQuery"
+          environment:
+              BIGQUERY_SERVICE_KEY_PATH: "/home/circleci/bigquery-service-key.json"
+          command: |
+            . dbt_venv/bin/activate
+            echo `pwd`
+            cd integration_tests
+            dbt --warn-error deps --target bigquery
+            dbt --warn-error seed --target bigquery --full-refresh
+            dbt --warn-error run --target bigquery --full-refresh
+            dbt --warn-error test --target bigquery
 
       - save_cache:
           key: deps1-{{ .Branch }}
@@ -98,5 +96,5 @@ workflows:
       - build:
           context:
             - profile-snowflake
+            - profile-bigquery
           #   - profile-redshift
-          #   - profile-bigquery
