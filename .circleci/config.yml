@@ -92,6 +92,8 @@ jobs:
   build-spark:
     docker:
       - image: cimg/python:3.9.9
+        command: |
+          apt-get install libsasl2-dev
       - image: godatadriven/spark:2
         environment:
           WAIT_FOR: localhost:5432
@@ -102,7 +104,6 @@ jobs:
           --conf spark.hadoop.javax.jdo.option.ConnectionUserName=dbt
           --conf spark.hadoop.javax.jdo.option.ConnectionPassword=dbt
           --conf spark.hadoop.javax.jdo.option.ConnectionDriverName=org.postgresql.Driver
-          apt-get install libsasl2-dev
       - image: postgres:9.6.17-alpine
         environment:
           POSTGRES_USER: dbt
