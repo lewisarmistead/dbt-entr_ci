@@ -105,7 +105,7 @@ jobs:
           --conf spark.hadoop.datanucleus.autoCreateSchema=true
           --conf spark.hadoop.datanucleus.autoCreateTables=true
           --conf spark.hadoop.datanucleus.fixedDatastore=false
-          --conf hive.metastore.schema.verification=false
+          --conf spark.hive.metastore.schema.verification=false
       - image: postgres:9.6.17-alpine
         environment:
           POSTGRES_USER: dbt
