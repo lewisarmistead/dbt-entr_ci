@@ -28,7 +28,7 @@ with
 select
     1 as asset_id,
     tag_dim.entr_tag_id,
-    tag_dim.tag_subtype_id,
+    map.tag_subtype_id,
     cast(src_molten.time_utc as {{dbt.type_timestamp()}}) as date_time,
     src_molten.tag_value,
     map.interval_s,

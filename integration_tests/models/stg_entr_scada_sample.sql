@@ -43,7 +43,7 @@ with
 select
     asset_dim.asset_id,
     tag_dim.entr_tag_id,
-    tag_dim.tag_subtype_id,
+    map.tag_subtype_id,
     cast(dedupe.date_time as {{dbt.type_timestamp()}}) as date_time,
     dedupe.tag_value,
     map.interval_s,
