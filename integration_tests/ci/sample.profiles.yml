@@ -47,3 +47,14 @@ integration_tests:
       warehouse: "{{ env_var('SNOWFLAKE_TEST_WAREHOUSE') }}"
       schema: "{{ env_var('SNOWFLAKE_TEST_SCHEMA') }}"
       threads: 8
+
+    spark:
+      type: spark
+      method: thrift
+      schema: entr_integration_tests_bigquery
+      host: "{{ env_var('SPARK_TEST_HOST') }}"
+      port: "{{ env_var('SPARK_TEST_PORT') | as_number }}"
+      user: "{{ env_var('SPARK_TEST_USER') }}"
+      connect_retries: 5
+      connect_timeout: 60
+      threads: 5

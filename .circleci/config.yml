@@ -89,6 +89,61 @@ jobs:
       - store_artifacts:
           path: ./logs
 
+  build-spark:
+    docker:
+      - image: cimg/python:3.9.9
+      - image: godatadriven/spark:3
+        environment:
+          WAIT_FOR: localhost:5432
+        command: >
+          --class org.apache.spark.sql.hive.thriftserver.HiveThriftServer2
+          --name Thrift JDBC/ODBC Server
+          --conf spark.hadoop.javax.jdo.option.ConnectionURL=jdbc:postgresql://localhost/metastore
+          --conf spark.hadoop.javax.jdo.option.ConnectionUserName=dbt
+          --conf spark.hadoop.javax.jdo.option.ConnectionPassword=dbt
+          --conf spark.hadoop.javax.jdo.option.ConnectionDriverName=org.postgresql.Driver
+      - image: postgres:9.6.17-alpine
+        environment:
+          POSTGRES_USER: dbt
+          POSTGRES_PASSWORD: dbt
+          POSTGRES_DB: metastore
+
+    steps:
+      - checkout
+
+      - run:
+          name: Wait for Spark-Thrift
+          command: dockerize -wait tcp://localhost:10000 -timeout 15m -wait-retry-interval 5s
+
+      - run:
+          name: "Set Up dbt"
+          # dbt-redshift 
+          command: |
+            python3 -m venv dbt_venv
+            . dbt_venv/bin/activate
+            pip install --upgrade pip setuptools
+            pip install dbt-spark[all]
+            pip install dbt-spark[PyHive]
+            mkdir -p ~/.dbt
+            cp integration_tests/ci/sample.profiles.yml ~/.dbt/profiles.yml
+
+      - run:
+          name: "Run Tests - dbt-utils"
+          environment:
+            SPARK_TEST_HOST: localhost
+            SPARK_TEST_USER: dbt
+            SPARK_TEST_PORT: 10000
+          command: |
+            . dbt_venv/bin/activate
+            cd integration_tests
+            dbt --warn-error deps --target spark
+            dbt --warn-error seed --target spark --full-refresh
+            dbt --warn-error run --target spark --full-refresh
+            dbt --warn-error test --target spark
+
+      - store_artifacts:
+          path: ./logs
+
 workflows:
   version: 2
   test-all:
@@ -98,3 +153,6 @@ workflows:
             - profile-snowflake
             - profile-bigquery
           #   - profile-redshift
+
+      - build-spark
+
