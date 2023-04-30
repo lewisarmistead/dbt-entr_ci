@@ -136,7 +136,7 @@ jobs:
             SPARK_TEST_PORT: 10000
           command: |
             . dbt_venv/bin/activate
-            cd integration_tests
+            cd integration_tests_spark
             dbt --warn-error deps --target spark
             dbt --warn-error seed --target spark --full-refresh
             dbt --warn-error run --target spark --full-refresh
