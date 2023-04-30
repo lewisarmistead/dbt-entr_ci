@@ -119,16 +119,16 @@ jobs:
           name: "Set Up dbt"
           # dbt-redshift 
           command: |
+            apt-get install libsasl2-dev
             python3 -m venv dbt_venv
             . dbt_venv/bin/activate
             pip install --upgrade pip setuptools
-            pip install dbt-spark[all]
             pip install dbt-spark[PyHive]
             mkdir -p ~/.dbt
             cp integration_tests/ci/sample.profiles.yml ~/.dbt/profiles.yml
 
       - run:
-          name: "Run Tests - dbt-utils"
+          name: "Run Tests - Spark"
           environment:
             SPARK_TEST_HOST: localhost
             SPARK_TEST_USER: dbt
