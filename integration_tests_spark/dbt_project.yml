@@ -2,7 +2,7 @@ name: 'entr_integration_tests_spark'
 version: '0.1'
 config-version: 2
 
-profile: 'integration_tests_spark'
+profile: 'integration_tests'
 
 dispatch:
   - macro_namespace: dbt_utils
