@@ -103,6 +103,7 @@ jobs:
           --conf spark.hadoop.javax.jdo.option.ConnectionPassword=dbt
           --conf spark.hadoop.javax.jdo.option.ConnectionDriverName=org.postgresql.Driver
           --conf spark.hadoop.datanucleus.autoCreateSchema=true
+          --conf spark.hadoop.datanucleus.autoCreateTables=true
       - image: postgres:9.6.17-alpine
         environment:
           POSTGRES_USER: dbt
