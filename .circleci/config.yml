@@ -93,8 +93,8 @@ jobs:
     docker:
       - image: cimg/python:3.9.9
         command: |
-          apt-get update
-          apt-get install libsasl2-dev
+          sudo apt-get update
+          sudo apt-get install libsasl2-dev
       - image: godatadriven/spark:2
         environment:
           WAIT_FOR: localhost:5432
