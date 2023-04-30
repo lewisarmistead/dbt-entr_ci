@@ -91,10 +91,7 @@ jobs:
 
   build-spark:
     docker:
-      - image: godatadriven/pyspark
-        command: |
-          sudo apt-get update
-          sudo apt-get install libsasl2-dev
+      - image: cimg/python:3.9.9
       - image: godatadriven/spark:2
         environment:
           WAIT_FOR: localhost:5432
@@ -122,6 +119,8 @@ jobs:
           name: "Set Up dbt"
           # dbt-redshift 
           command: |
+            sudo apt-get update
+            sudo apt-get install libsasl2-dev
             python3 -m venv dbt_venv
             . dbt_venv/bin/activate
             pip install --upgrade pip setuptools
