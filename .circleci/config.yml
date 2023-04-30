@@ -91,10 +91,7 @@ jobs:
 
   build-spark:
     docker:
-      - image: ghcr.io/dbt-labs/dbt-spark
-        command: |
-          sudo apt-get install docker-ce docker-ce-cli containerd.io
-        entrypoint: ["/bin/bash"]
+      - image: cimg/python:3.9.9
       - image: godatadriven/spark:2
         environment:
           WAIT_FOR: localhost:5432
